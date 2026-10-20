@@ -1,0 +1,46 @@
+import type { ModelLibraryItem } from './types'
+
+const asset = (model: string) => `${import.meta.env.BASE_URL}assets/models/storytellr/${model}.glb`
+const preview = (model: string) => `${import.meta.env.BASE_URL}assets/models/storytellr/${model}.jpg`
+
+export const modelLibrary: ModelLibraryItem[] = [
+  { model: 'terior:sofa-editorial', name: 'Sofa · tailored linen', category: 'Terior studio', width: 2.1, depth: 1, height: 0.86, material: 'Warm linen', estimated: 'Studio-built visual model · verify dimensions against the real product' },
+  { model: 'terior:coffee-table', name: 'Coffee table · solid oak', category: 'Terior studio', width: 1.18, depth: 0.68, height: 0.42, material: 'Smoked oak' },
+  { model: 'terior:floor-lamp', name: 'Floor lamp · brass and linen', category: 'Terior studio', width: 0.42, depth: 0.42, height: 1.62, material: 'Brushed brass' },
+  { model: 'terior:olive-tree', name: 'Olive tree · ceramic pot', category: 'Terior studio', width: 0.7, depth: 0.7, height: 1.7, material: 'Olive green' },
+  { model: 'chair-sofa-wide', name: 'Sofa · Storytellr library', category: 'Reference models', width: 2.1, depth: 0.92, height: 0.82, material: 'Warm linen', preview: preview('chair-sofa-wide'), estimated: 'Approximate reference asset · dimensions are estimates' },
+  { model: 'chair-sofa', name: 'Lounge chair', category: 'Seating', width: 0.92, depth: 0.9, height: 0.83, material: 'Moss velvet', preview: preview('chair-sofa') },
+  { model: 'chair-modern', name: 'Modern chair', category: 'Seating', width: 0.58, depth: 0.58, height: 0.86, material: 'Oak and linen', preview: preview('chair-modern') },
+  { model: 'chair-office', name: 'Office chair', category: 'Seating', width: 0.62, depth: 0.62, height: 1.08, material: 'Charcoal', preview: preview('chair-office') },
+  { model: 'chair-stool', name: 'Wood stool', category: 'Seating', width: 0.42, depth: 0.42, height: 0.48, material: 'Natural oak', preview: preview('chair-stool') },
+  { model: 'chair-stool-mini', name: 'Low stool', category: 'Seating', width: 0.34, depth: 0.34, height: 0.36, material: 'Natural oak', preview: preview('chair-stool-mini') },
+  { model: 'table-coffee', name: 'Coffee table', category: 'Tables', width: 1.18, depth: 0.68, height: 0.42, material: 'Smoked oak', preview: preview('table-coffee') },
+  { model: 'table-sit-square', name: 'Side table', category: 'Tables', width: 0.62, depth: 0.62, height: 0.54, material: 'Natural oak', preview: preview('table-sit-square') },
+  { model: 'table-sit-rectangle', name: 'Dining table', category: 'Tables', width: 1.55, depth: 0.86, height: 0.76, material: 'Natural oak', preview: preview('table-sit-rectangle') },
+  { model: 'table-desk', name: 'Writing desk', category: 'Tables', width: 1.3, depth: 0.64, height: 0.76, material: 'Natural oak', preview: preview('table-desk') },
+  { model: 'table-sit-circle', name: 'Round table', category: 'Tables', width: 1.1, depth: 1.1, height: 0.76, material: 'Smoked oak', preview: preview('table-sit-circle') },
+  { model: 'object-lamp', name: 'Floor lamp', category: 'Lighting', width: 0.42, depth: 0.42, height: 1.62, material: 'Brushed brass', preview: preview('object-lamp') },
+  { model: 'tree-bushy', name: 'Indoor tree', category: 'Decor', width: 0.7, depth: 0.7, height: 1.7, material: 'Olive green', preview: preview('tree-bushy') },
+  { model: 'tree', name: 'Potted plant', category: 'Decor', width: 0.58, depth: 0.58, height: 1.25, material: 'Olive green', preview: preview('tree') },
+  { model: 'cabinet-bookshelf', name: 'Bookshelf', category: 'Storage', width: 0.96, depth: 0.38, height: 1.68, material: 'Natural oak', preview: preview('cabinet-bookshelf') },
+  { model: 'cabinet-dresser-3', name: 'Low dresser', category: 'Storage', width: 1.18, depth: 0.48, height: 0.82, material: 'Natural oak', preview: preview('cabinet-dresser-3') },
+  { model: 'cabinet-dresser-5', name: 'Tall dresser', category: 'Storage', width: 0.82, depth: 0.46, height: 1.28, material: 'Natural oak', preview: preview('cabinet-dresser-5') },
+  { model: 'bed-king', name: 'King bed', category: 'Bedroom', width: 2.03, depth: 2.13, height: 0.78, material: 'Warm linen', preview: preview('bed-king') },
+  { model: 'bed-full', name: 'Double bed', category: 'Bedroom', width: 1.48, depth: 2.0, height: 0.74, material: 'Warm linen', preview: preview('bed-full') },
+  { model: 'chair-bar', name: 'Bar stool', category: 'Seating', width: 0.48, depth: 0.48, height: 1.03, material: 'Natural oak', preview: preview('chair-bar') },
+  { model: 'chair-box', name: 'Occasional chair', category: 'Seating', width: 0.72, depth: 0.72, height: 0.82, material: 'Warm linen', preview: preview('chair-box') },
+  { model: 'table-bar', name: 'Console table', category: 'Tables', width: 1.28, depth: 0.42, height: 0.82, material: 'Natural oak', preview: preview('table-bar') },
+  { model: 'table-nightstand', name: 'Nightstand', category: 'Storage', width: 0.52, depth: 0.42, height: 0.58, material: 'Natural oak', preview: preview('table-nightstand') },
+  { model: 'door-single', name: 'Single door', category: 'Architecture', width: 0.92, depth: 0.12, height: 2.1, material: 'White oak', preview: preview('door-single') },
+  { model: 'door-double', name: 'Double door', category: 'Architecture', width: 1.62, depth: 0.12, height: 2.1, material: 'White oak', preview: preview('door-double') },
+  { model: 'window-1', name: 'Window', category: 'Architecture', width: 1.5, depth: 0.12, height: 1.2, material: 'Clear glass', preview: preview('window-1') },
+  { model: 'stairs-single-6', name: 'Straight stairs', category: 'Architecture', width: 1.0, depth: 2.2, height: 1.3, material: 'Natural oak', preview: preview('stairs-single-6') },
+]
+
+export function modelUrl(model: string): string {
+  return asset(model)
+}
+
+export function findLibraryItem(model: string): ModelLibraryItem | undefined {
+  return modelLibrary.find(item => item.model === model)
+}

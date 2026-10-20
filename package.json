@@ -1,0 +1,55 @@
+{
+  "name": "terior",
+  "private": true,
+  "version": "0.1.0",
+  "description": "An editable AI-operable interior design and visualisation studio.",
+  "author": "ICUNI Labs",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5181 --strictPort",
+    "dev:electron": "concurrently -k -s first \"npm:dev\" \"wait-on http://127.0.0.1:5181 && cross-env TERIOR_DEV_SERVER_URL=http://127.0.0.1:5181 electron .\"",
+    "start:electron": "electron .",
+    "build:web": "tsc --noEmit && vite build",
+    "build": "npm run build:web",
+    "package:win": "npm run build:web && electron-builder --win nsis",
+    "package:dir": "npm run build:web && electron-builder --dir",
+    "mcp": "node mcp-server/server.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 5181"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/server": "^2.3.1",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@types/three": "0.185.0",
+    "@vitejs/plugin-react": "5.1.4",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.0.0",
+    "electron": "^44.9.1",
+    "electron-builder": "^26.15.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "three": "0.186.1",
+    "typescript": "5.6.3",
+    "vite": "7.3.7",
+    "wait-on": "^8.0.4",
+    "zod": "^4.0.0"
+  },
+  "build": {
+    "appId": "com.icuni.terior",
+    "productName": "Terior",
+    "asar": true,
+    "directories": { "output": "release" },
+    "files": ["dist/**/*", "electron/**/*", "package.json"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "artifactName": "Terior-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

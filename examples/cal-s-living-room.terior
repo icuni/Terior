@@ -1,0 +1,139 @@
+{
+  "format": "terior-project",
+  "schemaVersion": 1,
+  "projectName": "Cal's living room",
+  "revision": 4,
+  "room": {
+    "width": 5.8,
+    "depth": 4.8,
+    "height": 2.9,
+    "wallMaterial": "Limestone",
+    "floorMaterial": "Smoked oak",
+    "showCeiling": false
+  },
+  "lighting": {
+    "daylight": 74,
+    "warmth": 4200,
+    "fill": 42
+  },
+  "objects": [
+    {
+      "id": "sofa-main",
+      "name": "Sofa",
+      "model": "chair-sofa-wide",
+      "kind": "model",
+      "x": -0.15,
+      "z": -1.05,
+      "rotation": 0,
+      "width": 2.1,
+      "depth": 0.92,
+      "height": 0.82,
+      "material": "Warm linen",
+      "locked": false,
+      "visible": true,
+      "estimated": "Depth estimated · review model"
+    },
+    {
+      "id": "table-coffee",
+      "name": "Coffee table",
+      "model": "table-coffee",
+      "kind": "model",
+      "x": 0.1,
+      "z": 0.32,
+      "rotation": 0,
+      "width": 1.18,
+      "depth": 0.68,
+      "height": 0.42,
+      "material": "Smoked oak",
+      "locked": false,
+      "visible": true
+    },
+    {
+      "id": "floor-lamp",
+      "name": "Floor lamp",
+      "model": "object-lamp",
+      "kind": "model",
+      "x": 1.82,
+      "z": -0.83,
+      "rotation": -12,
+      "width": 0.42,
+      "depth": 0.42,
+      "height": 1.62,
+      "material": "Brushed brass",
+      "locked": false,
+      "visible": true
+    },
+    {
+      "id": "room-rug",
+      "name": "Rug",
+      "model": null,
+      "kind": "rug",
+      "x": 0.02,
+      "z": 0.28,
+      "rotation": 0,
+      "width": 2.85,
+      "depth": 2.05,
+      "height": 0.025,
+      "material": "Natural wool",
+      "locked": false,
+      "visible": true
+    },
+    {
+      "id": "plant-tree",
+      "name": "Plant",
+      "model": "tree-bushy",
+      "kind": "model",
+      "x": -2.1,
+      "z": -1.45,
+      "rotation": 18,
+      "width": 0.7,
+      "depth": 0.7,
+      "height": 1.7,
+      "material": "Olive green",
+      "locked": false,
+      "visible": true
+    }
+  ],
+  "cameraViews": [
+    {
+      "name": "Overview",
+      "position": [
+        3.5,
+        6.2,
+        8.4
+      ],
+      "target": [
+        0,
+        0.75,
+        0
+      ]
+    },
+    {
+      "name": "Sofa detail",
+      "position": [
+        2.8,
+        3,
+        5.2
+      ],
+      "target": [
+        0,
+        0.72,
+        -0.75
+      ]
+    },
+    {
+      "name": "Window side",
+      "position": [
+        2.15,
+        3.65,
+        -0.7
+      ],
+      "target": [
+        0.1,
+        1.15,
+        -0.1
+      ]
+    }
+  ],
+  "activeCamera": "Sofa detail"
+}

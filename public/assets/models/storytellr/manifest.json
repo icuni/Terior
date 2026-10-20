@@ -1,0 +1,434 @@
+[
+  {
+    "name": "bed-full",
+    "file": "bed-full.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/bed-full.glb",
+    "sha256": "2e58e79f6c538f0a82ec03395e2c8a7e13ef3e25d532033dc2d3c915f57b0760"
+  },
+  {
+    "name": "bed-full",
+    "file": "bed-full.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/bed-full.jpg",
+    "sha256": "d54970b15417b484e4a34b28c251bc613ea616853d831412d1c40301b8a1fd86"
+  },
+  {
+    "name": "bed-king",
+    "file": "bed-king.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/bed-king.glb",
+    "sha256": "109ea478da59d0717841a018f3dcf95799852aefae513efe4ae38f65b2e4086a"
+  },
+  {
+    "name": "bed-king",
+    "file": "bed-king.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/bed-king.jpg",
+    "sha256": "d6d8c18399d35b6a16360b1e65adb2eccda92c8d482661a5e2f0dbf3dd4942d9"
+  },
+  {
+    "name": "bed-twin",
+    "file": "bed-twin.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/bed-twin.glb",
+    "sha256": "4758c36c9fb37a14d52f440ba65a9f4595d9b0f8cc0a269bbbab85c7e512918a"
+  },
+  {
+    "name": "bed-twin",
+    "file": "bed-twin.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/bed-twin.jpg",
+    "sha256": "f18822e94a74494dc71a1989e98a0116d3f2c22bd0a89105a0311e6ad0034565"
+  },
+  {
+    "name": "building_one_storey",
+    "file": "building_one_storey.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/building_one_storey.glb",
+    "sha256": "dafc9bbf2e6bf791debbf14677d20a785de715fc599c21c49cc5fdb495864e68"
+  },
+  {
+    "name": "cabinet-bookshelf",
+    "file": "cabinet-bookshelf.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/cabinet-bookshelf.glb",
+    "sha256": "431b9b91cea6a668adba42ed4d04ff499b849451ced256b2e634dba2a8e8da52"
+  },
+  {
+    "name": "cabinet-bookshelf",
+    "file": "cabinet-bookshelf.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/cabinet-bookshelf.jpg",
+    "sha256": "64fe80f9d80c83c09e4c566cfa581a69f419807907f419f6d6d2fa8ab514cb6e"
+  },
+  {
+    "name": "cabinet-dresser-3",
+    "file": "cabinet-dresser-3.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/cabinet-dresser-3.glb",
+    "sha256": "447c4ca978b52f7f324a4dfc172e32e0d9afec23aa7da7501145fafeda4044b2"
+  },
+  {
+    "name": "cabinet-dresser-3",
+    "file": "cabinet-dresser-3.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/cabinet-dresser-3.jpg",
+    "sha256": "6abb2c588c7220324646a4f7240b3c57832839d57dcdb8c0dea5f15b0a5f627c"
+  },
+  {
+    "name": "cabinet-dresser-5",
+    "file": "cabinet-dresser-5.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/cabinet-dresser-5.glb",
+    "sha256": "03b00cbe9f1e12d2cb99fef39efc7b7351f63afe5649a1c83b554699ab18af98"
+  },
+  {
+    "name": "cabinet-dresser-5",
+    "file": "cabinet-dresser-5.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/cabinet-dresser-5.jpg",
+    "sha256": "40320c81d3b1b9615c61449750653b98f5d5c3504bb03eea556774db14816b19"
+  },
+  {
+    "name": "chair-bar",
+    "file": "chair-bar.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-bar.glb",
+    "sha256": "c19b064324b124c842c61a179282af61b0dd133f21deb46d1167b90be0f8ff99"
+  },
+  {
+    "name": "chair-bar",
+    "file": "chair-bar.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-bar.jpg",
+    "sha256": "b6ae441350fc42fa55e3caa87316fe80ba3269fbe98c6b61138c6ba87e3df1a1"
+  },
+  {
+    "name": "chair-box",
+    "file": "chair-box.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-box.glb",
+    "sha256": "62950b06e1705a1ed54fd488d9a22e633f3361a86488f55ed11ed211bc4caa5d"
+  },
+  {
+    "name": "chair-box",
+    "file": "chair-box.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-box.jpg",
+    "sha256": "745da60ea8b89d772dc295f8234ac0ac5599c7c32a9880a2f8f73d06f7dcfb61"
+  },
+  {
+    "name": "chair-modern",
+    "file": "chair-modern.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-modern.glb",
+    "sha256": "e8b679c0267e4af277e067aa619a07aa6c62eff2576aaf8b2419db421fe15136"
+  },
+  {
+    "name": "chair-modern",
+    "file": "chair-modern.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-modern.jpg",
+    "sha256": "c974b7fc5cde24a6d6b2145e4a8682c299189c3f68b3986906859a9d0d293a83"
+  },
+  {
+    "name": "chair-office",
+    "file": "chair-office.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-office.glb",
+    "sha256": "06a01deda8ec529cc6dd50edd9c1f09b08de93c02b1851b390c32587f9affe03"
+  },
+  {
+    "name": "chair-office",
+    "file": "chair-office.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-office.jpg",
+    "sha256": "5d83014fc9eda3d5cf602582bbf84e6a04d77ccd430feccb4520af5385b0296e"
+  },
+  {
+    "name": "chair-sofa-wide",
+    "file": "chair-sofa-wide.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-sofa-wide.glb",
+    "sha256": "aac5bee781bba05367948292aa794d24bb2506749aea5f4098a668cd21cc1380"
+  },
+  {
+    "name": "chair-sofa-wide",
+    "file": "chair-sofa-wide.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-sofa-wide.jpg",
+    "sha256": "0f08db4507500a78085514919123eefdc96aac0bc65b4606bef5826345dcda42"
+  },
+  {
+    "name": "chair-sofa",
+    "file": "chair-sofa.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-sofa.glb",
+    "sha256": "7a14ca43b954e9ffbd72a6ef26e6df912a7a8313bda9d9ccc162de4803e1b984"
+  },
+  {
+    "name": "chair-sofa",
+    "file": "chair-sofa.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-sofa.jpg",
+    "sha256": "9ae04bc52376d82509671655d961b3d520afaf105fa7ac73954adb3130c0784c"
+  },
+  {
+    "name": "chair-stool-mini",
+    "file": "chair-stool-mini.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-stool-mini.glb",
+    "sha256": "c550ddc2bbb8db95cb4b3bbdd861358bd2d053b70cea3ec45976d7a03879b970"
+  },
+  {
+    "name": "chair-stool-mini",
+    "file": "chair-stool-mini.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-stool-mini.jpg",
+    "sha256": "c288a888350dd627b5813e0d2cee7810952a93047da647b88d6de27da1255fd1"
+  },
+  {
+    "name": "chair-stool",
+    "file": "chair-stool.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-stool.glb",
+    "sha256": "c11ab0206c90380f226657165d4fe58a8688a2006d1e91bdd54115c17d70a27e"
+  },
+  {
+    "name": "chair-stool",
+    "file": "chair-stool.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair-stool.jpg",
+    "sha256": "f4a254c5b7585a12bfe2519c81e7ca208df8d3f78e6b7d391180aa70125a3ce9"
+  },
+  {
+    "name": "chair",
+    "file": "chair.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/chair.glb",
+    "sha256": "e4d2e164dfd19fc1844e5ab5d99571ebba87292ce0560a4a4d1ff8609208852b"
+  },
+  {
+    "name": "door-double-frame",
+    "file": "door-double-frame.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-double-frame.glb",
+    "sha256": "3c4f802e83503f9e812aea0eac7ed1a37280e5850ce453a12b8a0adc5c7f7721"
+  },
+  {
+    "name": "door-double-frame",
+    "file": "door-double-frame.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-double-frame.jpg",
+    "sha256": "f4ea2e839ae1111fc6ef69198f282cde998e355436664ad1153d632666873b74"
+  },
+  {
+    "name": "door-double",
+    "file": "door-double.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-double.glb",
+    "sha256": "5b6f2c246d0cccb16196fdff8e84f448f2ea895db4cb6910bb480128c155e4df"
+  },
+  {
+    "name": "door-double",
+    "file": "door-double.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-double.jpg",
+    "sha256": "4a629dcebe4455dddc4b3bbfc91e5971d6d30d7792fe396989444fc3a2097921"
+  },
+  {
+    "name": "door-single-frame",
+    "file": "door-single-frame.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-single-frame.glb",
+    "sha256": "eaf9b029cd285edae904b12a5e1c025465afc9aae9b4629117c4ec91c8580c89"
+  },
+  {
+    "name": "door-single-frame",
+    "file": "door-single-frame.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-single-frame.jpg",
+    "sha256": "9003664ca4b90769873e604245a8895e5e7e1a3ec408ea08d49866c5db0384df"
+  },
+  {
+    "name": "door-single",
+    "file": "door-single.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-single.glb",
+    "sha256": "b03bf789f10f9cf7b465765519050b7e81e34fd8258a3035fde20f3d72975f56"
+  },
+  {
+    "name": "door-single",
+    "file": "door-single.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door-single.jpg",
+    "sha256": "02aba0c12c64846146ad0f983acd0d7636b655085418a82624f1cefb8c6ba08a"
+  },
+  {
+    "name": "door",
+    "file": "door.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/door.glb",
+    "sha256": "53b9e4f89f3b7c0f879de2f7b3ffc15b485307b6c895c8deec84cd6e82be3cfe"
+  },
+  {
+    "name": "object-lamp",
+    "file": "object-lamp.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/object-lamp.glb",
+    "sha256": "998ab329dadd27140fd1b65728d9ff0c124ad1d363e304bb020d7f8f5c7925af"
+  },
+  {
+    "name": "object-lamp",
+    "file": "object-lamp.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/object-lamp.jpg",
+    "sha256": "ea53d2ec344b339ce1e71f3bda8dc431fc3ab3dc9dfab5818af78b748827691c"
+  },
+  {
+    "name": "railing-1",
+    "file": "railing-1.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/railing-1.glb",
+    "sha256": "3d672cca7a64505df11f74f5b3b57d8ee4121df7f97afb52c8fedf2e1f7f38d2"
+  },
+  {
+    "name": "railing-1",
+    "file": "railing-1.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/railing-1.jpg",
+    "sha256": "b86d65a35e4a73ffc67bce28aa673079cefed9077d56238954553f10ceec63b9"
+  },
+  {
+    "name": "stairs-single-6",
+    "file": "stairs-single-6.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/stairs-single-6.glb",
+    "sha256": "dcd2c567f83c2b9d91aea6858b90285d9097865678b312146ae5fd2dc959e59e"
+  },
+  {
+    "name": "stairs-single-6",
+    "file": "stairs-single-6.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/stairs-single-6.jpg",
+    "sha256": "b0920e03114f495ce8110e04f28bac1f8bed535dc0f95e0ce19cb76a0120f697"
+  },
+  {
+    "name": "table-bar-circle",
+    "file": "table-bar-circle.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-bar-circle.glb",
+    "sha256": "c01444ac62e54dd02bdac4a60c1e0a523cd97be1d524cf912bdcf28c3e47bf05"
+  },
+  {
+    "name": "table-bar-circle",
+    "file": "table-bar-circle.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-bar-circle.jpg",
+    "sha256": "227b1d80eae921882a12c053c178519a00651d3dcf1d02a55f710ddacec87329"
+  },
+  {
+    "name": "table-bar-rectangle",
+    "file": "table-bar-rectangle.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-bar-rectangle.glb",
+    "sha256": "ee44606db7a5efc606099d6c02734bf2e0a1acdbfb445e65da46f467a0ba8dc6"
+  },
+  {
+    "name": "table-bar-rectangle",
+    "file": "table-bar-rectangle.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-bar-rectangle.jpg",
+    "sha256": "73ae67620625a198c744b834752f5fe927fe3d40ed2a325b8463eaae6fd589c5"
+  },
+  {
+    "name": "table-bar",
+    "file": "table-bar.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-bar.glb",
+    "sha256": "60c62bd490f0d432ccb5a3e00e08aa8a995f9bf16b80aee8d214ced3f68b9f5b"
+  },
+  {
+    "name": "table-bar",
+    "file": "table-bar.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-bar.jpg",
+    "sha256": "0badb8f8aa6e3dd0892be95e9cadc51f638d86bb70374ced21138c850e6934f2"
+  },
+  {
+    "name": "table-counter",
+    "file": "table-counter.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-counter.glb",
+    "sha256": "27ef18dc776a54d71a75ffae82b24a19055b34b9354e4f3ca3dd1887e23c51e9"
+  },
+  {
+    "name": "table-counter",
+    "file": "table-counter.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-counter.jpg",
+    "sha256": "740631a9f7050bb6790e8b7c963ee76fc14068b6b791f42bebe754f71a7f53bd"
+  },
+  {
+    "name": "table-coffee",
+    "file": "table-coffee.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-coffee.glb",
+    "sha256": "c7385f831b5b889d816c138b1926e2061edd33e7c649d224a0013ec662e74803"
+  },
+  {
+    "name": "table-coffee",
+    "file": "table-coffee.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-coffee.jpg",
+    "sha256": "221fcc5d28906ece36431dc6283e413807d48c8d7d6798380b26c828f82f9c47"
+  },
+  {
+    "name": "table-desk",
+    "file": "table-desk.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-desk.glb",
+    "sha256": "d999a8569e03565061620b15b55624b1086ff967f37c8e6c65cf11b2aa86326f"
+  },
+  {
+    "name": "table-desk",
+    "file": "table-desk.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-desk.jpg",
+    "sha256": "dfc142d133cf84c61ff9a283269ca14017475ac7991025fa4fc49f37c439c676"
+  },
+  {
+    "name": "table-nightstand",
+    "file": "table-nightstand.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-nightstand.glb",
+    "sha256": "bd59955c4a7b216166079c569082e6b141a1012fa987584d71390c2aa5922378"
+  },
+  {
+    "name": "table-nightstand",
+    "file": "table-nightstand.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-nightstand.jpg",
+    "sha256": "3496dea239c518b9514a6a8d5920a8d8f0d55b5a37be5824b11f6d243ee197d3"
+  },
+  {
+    "name": "table-sit-circle",
+    "file": "table-sit-circle.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-sit-circle.glb",
+    "sha256": "dff142fdfec7fc02872b47fe14348b01c7735e0fd35f4f7dde31db77242da2fe"
+  },
+  {
+    "name": "table-sit-circle",
+    "file": "table-sit-circle.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-sit-circle.jpg",
+    "sha256": "50eabcf88bedcb72c9047c7e615698acf171379924ae0ee9d3cd870134a2a2fe"
+  },
+  {
+    "name": "table-sit-rectangle",
+    "file": "table-sit-rectangle.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-sit-rectangle.glb",
+    "sha256": "53456a059b9e71091153b0628b576b47be0bfe71398f17975a56f67ae0a74a0f"
+  },
+  {
+    "name": "table-sit-rectangle",
+    "file": "table-sit-rectangle.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-sit-rectangle.jpg",
+    "sha256": "d7b4767435da8826bd399c5b9d41f49573bd261489df1a0862d5a029eaf4e10a"
+  },
+  {
+    "name": "table-sit-square",
+    "file": "table-sit-square.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-sit-square.glb",
+    "sha256": "2c10d49cc246cf5b9229f5879253be77003c4a1ec3f6de1c1ba1c69b8b6856b9"
+  },
+  {
+    "name": "table-sit-square",
+    "file": "table-sit-square.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/table-sit-square.jpg",
+    "sha256": "307b307ff7e251cbcc01d78b0b95d2b53ecdbc3adef05f5a477533f41c6de230"
+  },
+  {
+    "name": "tree-bushy",
+    "file": "tree-bushy.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/tree-bushy.glb",
+    "sha256": "43254b6da954349981ef2b3ecc373e6089710882c2b42d5ee197bc8bc8dd35ed"
+  },
+  {
+    "name": "tree-bushy",
+    "file": "tree-bushy.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/tree-bushy.jpg",
+    "sha256": "89cd0fc98d3761dbb8ece3550c4eab10ee190e4ba06c28e2e2cafed0db5f424f"
+  },
+  {
+    "name": "tree-no-leaves",
+    "file": "tree-no-leaves.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/tree-no-leaves.glb",
+    "sha256": "4fbae5b9bb0423e21ef10b91589b7c79499d0e029358d74002ec6324e8d228df"
+  },
+  {
+    "name": "tree-no-leaves",
+    "file": "tree-no-leaves.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/tree-no-leaves.jpg",
+    "sha256": "9b10f080a804106c1456db2958cd288057d04b6929b316898480b37e9ec63362"
+  },
+  {
+    "name": "tree",
+    "file": "tree.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/tree.glb",
+    "sha256": "2f0f79f6d959c41a0216b67bc4eec7fb90e447e062d35432521e8b6277aee945"
+  },
+  {
+    "name": "window-1",
+    "file": "window-1.glb",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/window-1.glb",
+    "sha256": "fdf9dff1c81e892e5d73bdaba126061fb732d7ccb90b5b1e3ab183411927a088"
+  },
+  {
+    "name": "window-1",
+    "file": "window-1.jpg",
+    "source": "Storytellr/reference/wonderunit-storyboarder/src/data/shot-generator/objects/window-1.jpg",
+    "sha256": "58aea0f2808d47cbe3476101621e1c5b9d3f802b306e65b41e2893c85a267827"
+  }
+]
