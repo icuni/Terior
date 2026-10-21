@@ -11,7 +11,7 @@ type Proposal = SceneProposal & {
 
 interface TeriorFileHandle {
   getFile: () => Promise<File>
-  createWritable: () => Promise<{ write: (data: string) => Promise<void>; close: () => Promise<void> }>
+  createWritable: () => Promise<{ write: (data: string) => Promise<void>; close: () => Promise<void>; abort?: () => Promise<void> }>
 }
 
 interface FilePickerWindow extends Window {
@@ -318,37 +318,78 @@ function App() {
     transact(current => ({ ...current, objects: current.objects.map(object => object.id === id ? { ...object, ...patch } : object) }), history)
   }, [transact])
 
+  const writeProjectFile = useCallback((handle: TeriorFileHandle, snapshot: ProjectScene) => {
+    const serialized = JSON.stringify(snapshot, null, 2)
+    const write = async () => {
+      if (projectFileHandleRef.current !== handle) return false
+      try {
+        const file = await handle.getFile()
+        const diskText = await file.text()
+        if (fileRevisionRef.current !== null) {
+          if (diskText !== fileTextRef.current) {
+            setSaveState('File changed in IDE')
+            setOpenError('The project file changed outside Terior, including a possible MCP proposal. Terior left that newer file untouched. Reopen it or save a copy before continuing.')
+            return false
+          }
+          const disk = parseProject(JSON.parse(diskText))
+          if (disk.revision !== fileRevisionRef.current) {
+            setSaveState('File changed in IDE')
+            setOpenError('The project file changed outside Terior. Reopen the latest project or save a copy before continuing.')
+            return false
+          }
+        }
+        const writable = await handle.createWritable()
+        try {
+          await writable.write(serialized)
+          if (fileRevisionRef.current !== null) {
+            const latestBeforeCommit = await (await handle.getFile()).text()
+            if (latestBeforeCommit !== fileTextRef.current) {
+              await writable.abort?.().catch(() => {})
+              setSaveState('File changed in IDE')
+              setOpenError('The project file changed while Terior was preparing its save. Terior left that newer file untouched. Reopen it or save a copy before continuing.')
+              return false
+            }
+          }
+          await writable.close()
+        } catch (error) {
+          await writable.abort?.().catch(() => {})
+          throw error
+        }
+        const savedFile = await handle.getFile()
+        const savedText = await savedFile.text()
+        if (savedText !== serialized) {
+          setSaveState('File changed in IDE')
+          setOpenError('The project changed while Terior was saving. The newer file was preserved; reopen it or save a copy before continuing.')
+          return false
+        }
+        fileRevisionRef.current = snapshot.revision
+        fileTextRef.current = savedText
+        fileModifiedRef.current = savedFile.lastModified
+        setSaveState(snapshot.pendingProposal ? 'IDE proposal ready' : 'Saved to project file')
+        return true
+      } catch {
+        setSaveState('Project file unavailable')
+        return false
+      }
+    }
+    const queued = fileWriteQueueRef.current.then(write, write)
+    fileWriteQueueRef.current = queued.then(() => undefined, () => undefined)
+    return queued
+  }, [])
+
   useEffect(() => {
     setSaveState('Saving')
     const timeout = window.setTimeout(() => {
-      const serialized = JSON.stringify(project, null, 2)
+      const snapshot = projectRef.current
+      const serialized = JSON.stringify(snapshot, null, 2)
       try { localStorage.setItem('terior-project-v1', serialized) }
       catch { if (!projectFileHandleRef.current) { setSaveState('Local save unavailable'); return } }
       const handle = projectFileHandleRef.current
       if (!handle) { setSaveState('Saved on this device'); return }
-      fileWriteQueueRef.current = fileWriteQueueRef.current.then(async () => {
-        try {
-          const file = await handle.getFile()
-          const diskText = await file.text()
-          const disk = parseProject(JSON.parse(diskText))
-          if (fileRevisionRef.current !== null && disk.revision !== fileRevisionRef.current) {
-            setSaveState('File changed in IDE')
-            return
-          }
-          const writable = await handle.createWritable()
-          await writable.write(serialized)
-          await writable.close()
-          fileRevisionRef.current = project.revision
-          fileTextRef.current = serialized
-          fileModifiedRef.current = (await handle.getFile()).lastModified
-          setSaveState('Saved to project file')
-        } catch {
-          setSaveState('Project file unavailable')
-        }
-      })
+      void writeProjectFile(handle, snapshot)
     }, 320)
     return () => window.clearTimeout(timeout)
-  }, [project])
+  }, [project, writeProjectFile])
 
   useEffect(() => {
     const handle = projectFileHandleRef.current
@@ -440,29 +481,15 @@ function App() {
       try {
         handle = await picker.showSaveFilePicker({ suggestedName: projectFilename(projectRef.current.projectName, 'terior'), types: [{ description: 'Terior project', accept: { 'application/json': ['.terior'] } }] })
         projectFileHandleRef.current = handle
+        fileRevisionRef.current = null
+        fileTextRef.current = ''
+        fileModifiedRef.current = 0
       } catch { return }
     }
     const serialized = JSON.stringify(projectRef.current, null, 2)
     if (handle) {
-      try {
-        if (fileRevisionRef.current !== null) {
-          const disk = parseProject(JSON.parse(await (await handle.getFile()).text()))
-          if (disk.revision !== fileRevisionRef.current) {
-            setSaveState('File changed in IDE')
-            setOpenError('The project file changed outside Terior. Reopen the latest file before saving so newer edits are not overwritten.')
-            return
-          }
-        }
-        const writable = await handle.createWritable()
-        await writable.write(serialized)
-        await writable.close()
-        fileRevisionRef.current = projectRef.current.revision
-        fileTextRef.current = serialized
-        fileModifiedRef.current = (await handle.getFile()).lastModified
-        setSaveState('Saved to project file')
-      } catch {
-        setSaveState('Project file unavailable')
-      }
+      const saved = await writeProjectFile(handle, projectRef.current)
+      if (!saved) return
     } else {
       download(new Blob([serialized], { type: 'application/json' }), projectFilename(projectRef.current.projectName, 'terior'))
       setSaveState('Project downloaded')
@@ -645,18 +672,23 @@ function App() {
       setPromptError('The scene changed while this preview was open. Preview the instruction again to keep your newer edits.');
       setProposal(null); return
     }
+    const cameraPoseChange = proposal.cameraPoseChange
+    if (cameraPoseChange && !projectRef.current.cameraViews.some(view => view.name === cameraPoseChange.name)) {
+      setPromptError(`Saved camera “${cameraPoseChange.name}” no longer exists. Preview the instruction again.`)
+      setProposal(null); return
+    }
     const selectedLighting = proposal.lightingOptions?.[lightingChoice]?.value
     const lightingChange = selectedLighting ?? proposal.lightingChange
     transact(current => ({
       ...current,
       objects: proposal.objectChanges ? current.objects.map(object => proposal.objectChanges!.find(change => change.id === object.id) ?? object) : current.objects,
       lighting: lightingChange ?? current.lighting,
-      cameraViews: proposal.cameraPoseChange ? current.cameraViews.map(view => view.name === current.activeCamera ? { ...proposal.cameraPoseChange!, name: view.name } : view) : current.cameraViews,
+      cameraViews: cameraPoseChange ? current.cameraViews.map(view => view.name === cameraPoseChange.name ? { ...cameraPoseChange } : view) : current.cameraViews,
       references: proposal.referenceAddition ? [...current.references, proposal.referenceAddition] : current.references,
       pendingProposal: undefined,
     }))
-    if (proposal.cameraPoseChange) {
-      const cameraPose = { ...proposal.cameraPoseChange, name: projectRef.current.activeCamera }
+    if (cameraPoseChange && projectRef.current.activeCamera === cameraPoseChange.name) {
+      const cameraPose = { ...cameraPoseChange }
       cameraPoseRef.current = cameraPose
       setLiveCamera(cameraPose)
       canvasApi?.setCameraPose(cameraPose)

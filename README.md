@@ -19,10 +19,10 @@ The current portable desktop output is `release/win-unpacked/Terior.exe`. Keep t
 
 - The working project autosaves in this browser's local storage.
 - **Save project** downloads an editable `.terior` JSON file. **Open project** restores it.
-- **Export PNG** captures the current view. **Export GLB** exports the editable room geometry and visible objects.
+- **Export PNG** captures the current view. **Export GLB** exports the editable room geometry, visible objects and named saved camera views.
 - Camera positions and aim points are editable and saved with the project. A local prompt previewer demonstrates object, camera and lighting proposals; it does not call an AI service.
 - Paste or drop images from an IDE chat into the scene as labelled 2D reference planes. They remain distinct from editable 3D assets.
-- `mcp-server/server.mjs` exposes Terior scene read and revision-checked proposal tools to compatible IDE/CLI MCP clients. Run `npm run mcp -- --project "C:\\path\\to\\room.terior"` from this checkout; this source bridge is not bundled into the Electron runtime. The client owns chat image attachment; Terior stores a proposal and waits for a person to apply or reject it.
+- `mcp-server/server.mjs` exposes Terior scene read and revision-checked proposal tools to compatible IDE/CLI MCP clients. Run `npm run mcp -- --project "C:\\path\\to\\room.terior"` from this checkout; this source bridge is not bundled into the Electron runtime. The client owns chat image attachment; Terior stores a proposal and waits for a person to apply or reject it. Editor autosaves compare the full file snapshot as well as the scene revision, so a same-revision MCP proposal is detected instead of silently replaced by a stale save.
 - The **Blender** panel includes an embedded Windows PowerShell manager for `uv`, MCP for Blender setup and updates, Codex/Claude Code registration and status checks. Its client entries set `BLENDER_MCP_SAFE_MODE=1` and `DISABLE_TELEMETRY=true`. Other MCP clients can use a standard stdio config.
 - Blender build records are saved in the `.terior` project. A build starts with a revisioned GLB handoff; import it in Blender and track the `.blend` file location and review status in Terior.
 - The Electron runtime ships the bundled editor and does not need React, Three.js or the source MCP bridge installed beside it. The MCP bridge runs from a project checkout where its development dependencies are installed.

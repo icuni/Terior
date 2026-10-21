@@ -41,9 +41,16 @@ async function withProjectLock(run) {
     project.references ??= []
     const result = await run(project)
     if (result.write) {
+      const latestRaw = await readFile(projectPath, 'utf8')
+      if (latestRaw !== raw) throw new Error('The Terior project changed while this proposal was being prepared. Read the scene again before retrying.')
       const temporaryPath = `${projectPath}.${process.pid}.${randomUUID()}.tmp`
-      await writeFile(temporaryPath, `${JSON.stringify(project, null, 2)}\n`, 'utf8')
-      await rename(temporaryPath, projectPath)
+      try {
+        await writeFile(temporaryPath, `${JSON.stringify(project, null, 2)}\n`, 'utf8')
+        await rename(temporaryPath, projectPath)
+      } catch (error) {
+        await unlink(temporaryPath).catch(() => {})
+        throw error
+      }
     }
     return result.value
   } finally {

@@ -609,7 +609,17 @@ export default function SceneCanvas({ project, selectedId, tool, onSelect, onTra
       }),
       exportGlb: async () => {
         const exporter = new GLTFExporter()
-        const result = await exporter.parseAsync(world, { binary: true, onlyVisible: true })
+        const exportWorld = world.clone(true)
+        projectRef.current.cameraViews.forEach(view => {
+          const savedCamera = new THREE.PerspectiveCamera(camera.fov, camera.aspect, camera.near, camera.far)
+          savedCamera.name = view.name
+          savedCamera.position.set(...view.position)
+          savedCamera.lookAt(new THREE.Vector3(...view.target))
+          savedCamera.userData = { teriorCameraView: true, target: [...view.target], active: view.name === projectRef.current.activeCamera }
+          exportWorld.add(savedCamera)
+        })
+        exportWorld.updateMatrixWorld(true)
+        const result = await exporter.parseAsync(exportWorld, { binary: true, onlyVisible: true })
         if (!(result instanceof ArrayBuffer)) throw new Error('The GLB exporter returned an unexpected file format.')
         return new Blob([result], { type: 'model/gltf-binary' })
       },
