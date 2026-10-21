@@ -61,6 +61,7 @@ export interface SceneProposal {
   baseRevision: number
   summary: string
   objectChanges?: SceneObject[]
+  objectAddition?: SceneObject
   lightingChange?: LightingSettings
   cameraPoseChange?: CameraPose
   referenceAddition?: ReferenceImage

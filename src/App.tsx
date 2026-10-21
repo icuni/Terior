@@ -42,7 +42,7 @@ declare global {
   interface Window { teriorDesktop?: TeriorDesktopBridge }
 }
 
-const materialOptions = ['Warm linen', 'Moss velvet', 'Oak and linen', 'Charcoal', 'Natural oak', 'Smoked oak', 'Brushed brass', 'Olive green']
+const materialOptions = ['Warm linen', 'Moss velvet', 'Oak and linen', 'Charcoal', 'Natural oak', 'Smoked oak', 'Brushed brass', 'Olive green', 'White oak', 'Clear glass']
 const wallOptions = ['Limestone', 'Chalk', 'Soft sage', 'Blue grey']
 const floorOptions = ['Smoked oak', 'Natural oak', 'Walnut', 'Concrete']
 
@@ -240,7 +240,7 @@ function App() {
   const [showExportMenu, setShowExportMenu] = useState(false)
   const [exportState, setExportState] = useState('')
   const [prompt, setPrompt] = useState('')
-  const [proposal, setProposal] = useState<Proposal | null>(null)
+  const [proposal, setProposal] = useState<Proposal | null>(() => project.pendingProposal ? { ...project.pendingProposal } : null)
   const [lightingChoice, setLightingChoice] = useState(0)
   const [promptError, setPromptError] = useState('')
   const [openError, setOpenError] = useState('')
@@ -677,11 +677,30 @@ function App() {
       setPromptError(`Saved camera “${cameraPoseChange.name}” no longer exists. Preview the instruction again.`)
       setProposal(null); return
     }
+    if (proposal.objectAddition && projectRef.current.objects.some(object => object.id === proposal.objectAddition!.id)) {
+      setPromptError('The proposed object already exists in this scene. Refresh the proposal before applying it.')
+      setProposal(null); return
+    }
+    for (const change of proposal.objectChanges ?? []) {
+      const current = projectRef.current.objects.find(object => object.id === change.id)
+      if (!current) {
+        setPromptError(`${change.name} no longer exists. Refresh the proposal before applying it.`)
+        setProposal(null); return
+      }
+      const dimensionsChanged = current.width !== change.width || current.depth !== change.depth || current.height !== change.height
+      if (current.locked || (dimensionsChanged && current.dimensionsLocked)) {
+        setPromptError(`${current.name} is locked. Unlock the object or its dimensions before applying this proposal.`)
+        setProposal(null); return
+      }
+    }
     const selectedLighting = proposal.lightingOptions?.[lightingChoice]?.value
     const lightingChange = selectedLighting ?? proposal.lightingChange
     transact(current => ({
       ...current,
-      objects: proposal.objectChanges ? current.objects.map(object => proposal.objectChanges!.find(change => change.id === object.id) ?? object) : current.objects,
+      objects: [
+        ...(proposal.objectChanges ? current.objects.map(object => proposal.objectChanges!.find(change => change.id === object.id) ?? object) : current.objects),
+        ...(proposal.objectAddition ? [proposal.objectAddition] : []),
+      ],
       lighting: lightingChange ?? current.lighting,
       cameraViews: cameraPoseChange ? current.cameraViews.map(view => view.name === cameraPoseChange.name ? { ...cameraPoseChange } : view) : current.cameraViews,
       references: proposal.referenceAddition ? [...current.references, proposal.referenceAddition] : current.references,
@@ -694,6 +713,7 @@ function App() {
       canvasApi?.setCameraPose(cameraPose)
     }
     if (proposal.referenceAddition) setSelectedReferenceId(proposal.referenceAddition.id)
+    if (proposal.objectAddition) { setSelectedId(proposal.objectAddition.id); setPanel('object') }
     setPrompt(''); setProposal(null); setPromptError(''); setPreviewMode(false)
   }
 
@@ -1034,9 +1054,11 @@ function App() {
           <div className="proposal-head"><span className="proposal-icon"><Icon name="spark" size={15}/></span><strong>{project.pendingProposal?.id === proposal.id ? 'IDE proposal' : 'Proposed change'}</strong><button className="plain-icon" onClick={dismissProposal} aria-label="Dismiss preview"><Icon name="close" size={15}/></button></div>
           <p>{proposal.summary}</p>
           {proposal.referenceAddition && <div className="proposal-reference"><img src={proposal.referenceAddition.dataUrl} alt=""/><span>Photographic reference plane · 2D image</span></div>}
+          {proposal.objectAddition && <div className="proposal-camera">{proposal.objectAddition.width.toFixed(2)} W × {proposal.objectAddition.depth.toFixed(2)} D × {proposal.objectAddition.height.toFixed(2)} H m · {proposal.objectAddition.material}</div>}
+          {proposal.objectAddition?.estimated && <div className="proposal-camera">{proposal.objectAddition.estimated}</div>}
           {proposal.cameraPoseChange && <div className="proposal-camera">Position: {proposal.cameraPoseChange.position.map(value => value.toFixed(2)).join(', ')} m · Aim: {proposal.cameraPoseChange.target.map(value => value.toFixed(2)).join(', ')} m</div>}
           {proposal.lightingOptions && <div className="proposal-options">{proposal.lightingOptions.map((option, index) => <button key={option.label} className={lightingChoice === index ? 'selected' : ''} onClick={() => setLightingChoice(index)}><span className={`option-light option-${index}`}/>{option.label}</button>)}</div>}
-          <div className="proposal-actions"><span>Preview based on revision r{proposal.baseRevision}</span><button className="apply-button" onClick={applyProposal}><Icon name="check" size={15}/>{proposal.referenceAddition ? 'Add reference' : 'Apply change'}</button></div>
+          <div className="proposal-actions"><span>Preview based on revision r{proposal.baseRevision}</span><button className="apply-button" onClick={applyProposal}><Icon name="check" size={15}/>{proposal.referenceAddition ? 'Add reference' : proposal.objectAddition ? 'Add object' : 'Apply change'}</button></div>
         </div>}
         {promptError && <div className="prompt-error"><Icon name="warning" size={15}/><span>{promptError}</span><button className="plain-icon" onClick={() => setPromptError('')} aria-label="Dismiss message"><Icon name="close" size={14}/></button></div>}
         <div className="prompt-bar"><Icon name="spark" size={19}/><input value={prompt} onChange={event => setPrompt(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') previewInstruction() }} placeholder="Describe a change or camera position…" aria-label="Describe a change"/><button className="attach-reference" onClick={() => referenceInputRef.current?.click()} title="Attach an image reference"><Icon name="image" size={16}/><span>Image</span></button><button className="preview-button" onClick={previewInstruction}>Preview change</button></div>

@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto'
 import { McpServer } from '@modelcontextprotocol/server'
 import { serveStdio } from '@modelcontextprotocol/server/stdio'
 import * as z from 'zod/v4'
+import modelCatalog from '../src/model-catalog.json' with { type: 'json' }
 
 const args = process.argv.slice(2)
 const projectArg = args.findIndex(value => value === '--project')
@@ -15,6 +16,11 @@ if (!projectPath || projectPath === path.resolve('.')) {
 
 const label = 'Terior scene tools'
 const number = z.number().finite().min(-100).max(100)
+const dimension = z.number().finite().min(0.05).max(20)
+const materials = ['Warm linen', 'Moss velvet', 'Oak and linen', 'Charcoal', 'Natural oak', 'Smoked oak', 'Brushed brass', 'Olive green', 'White oak', 'Clear glass']
+const catalog = new Map(modelCatalog.map(item => [item.model, item]))
+const modelIds = [...catalog.keys(), 'rug']
+const materialSchema = z.enum(materials)
 
 async function withProjectLock(run) {
   const lockPath = `${projectPath}.terior-lock`
@@ -116,6 +122,87 @@ server.registerTool('terior_propose_object_transform', {
     if (x !== undefined || z !== undefined) parts.push(`move ${current.name} to X ${change.x.toFixed(2)} m, Z ${change.z.toFixed(2)} m`)
     if (rotation !== undefined) parts.push(`rotate ${current.name} to ${change.rotation.toFixed(1)}°`)
     return pending(project, { summary: `Proposed ${parts.join(' and ')}.`, objectChanges: [change] })
+  })
+  return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+})
+
+server.registerTool('terior_propose_object_dimensions', {
+  title: 'Propose object dimensions',
+  description: 'Propose real-world width, depth and/or height for an existing Terior object. Respects object and dimension locks. The editor previews the change for human approval; always read the scene revision first.',
+  inputSchema: z.object({
+    expectedRevision: z.number().int().positive(),
+    objectId: z.string().min(1),
+    width: dimension.optional(),
+    depth: dimension.optional(),
+    height: dimension.optional(),
+  }).refine(value => value.width !== undefined || value.depth !== undefined || value.height !== undefined, { message: 'Specify width, depth or height.' }),
+}, async ({ expectedRevision, objectId, width, depth, height }) => {
+  const result = await withProjectLock(project => {
+    checkRevision(project, expectedRevision)
+    const current = project.objects.find(object => object.id === objectId)
+    if (!current) throw new Error(`Object ${objectId} is not in this scene.`)
+    if (current.locked) throw new Error(`${current.name} is locked. Ask the user to unlock it before proposing a change.`)
+    if (current.dimensionsLocked) throw new Error(`${current.name} dimensions are locked. Ask the user to unlock dimensions before proposing a resize.`)
+    const change = { ...current, ...(width === undefined ? {} : { width }), ...(depth === undefined ? {} : { depth }), ...(height === undefined ? {} : { height }) }
+    const dimensions = `${change.width.toFixed(2)} W × ${change.depth.toFixed(2)} D × ${change.height.toFixed(2)} H m`
+    const changed = [width === undefined ? null : `width ${width.toFixed(2)} m`, depth === undefined ? null : `depth ${depth.toFixed(2)} m`, height === undefined ? null : `height ${height.toFixed(2)} m`].filter(Boolean)
+    return pending(project, { summary: `Propose changing ${current.name} ${changed.join(', ')}. Resulting size: ${dimensions}.`, objectChanges: [change] })
+  })
+  return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
+})
+
+server.registerTool('terior_propose_object_create', {
+  title: 'Propose a new object',
+  description: 'Propose a reusable furniture, fixture, decor or rug asset from Terior’s model library. Supply its model id and scene X/Z position in metres. Library dimensions and material are used unless overridden. Approximate assets include a note that distinguishes supplied dimensions from remaining library estimates. Terior shows the proposed object for human approval before adding it.',
+  inputSchema: z.object({
+    expectedRevision: z.number().int().positive(),
+    modelId: z.enum(modelIds),
+    name: z.string().trim().min(1).max(120).optional(),
+    x: number,
+    z: number,
+    rotation: z.number().finite().min(-360).max(360).optional(),
+    width: dimension.optional(),
+    depth: dimension.optional(),
+    height: dimension.optional(),
+    material: materialSchema.optional(),
+  }),
+}, async ({ expectedRevision, modelId, name, x, z: zPosition, rotation, width, depth, height, material }) => {
+  const result = await withProjectLock(project => {
+    checkRevision(project, expectedRevision)
+    const isRug = modelId === 'rug'
+    const definition = isRug
+      ? { name: 'Woven rug', model: null, kind: 'rug', width: 2.4, depth: 1.6, height: 0.03, material: 'Warm linen' }
+      : catalog.get(modelId)
+    if (!definition) throw new Error(`Model ${modelId} is not in the Terior library.`)
+    const suppliedDimensions = [['width', width], ['depth', depth], ['height', height]].filter(([, value]) => value !== undefined)
+    const estimatedDimensions = [['width', width, definition.width], ['depth', depth, definition.depth], ['height', height, definition.height]]
+      .filter(([, supplied]) => supplied === undefined)
+      .map(([label, , value]) => `${label} ${value.toFixed(2)} m`)
+    const estimate = definition.estimated
+      ? suppliedDimensions.length
+        ? `${definition.estimated.split(' · ')[0]} · supplied ${suppliedDimensions.map(([label, value]) => `${label} ${value.toFixed(2)} m`).join(', ')}${estimatedDimensions.length ? `; library estimates ${estimatedDimensions.join(', ')}` : ''}; geometry remains approximate`
+        : definition.estimated
+      : undefined
+    const object = {
+      id: `mcp-${randomUUID().slice(0, 12)}`,
+      name: name ?? definition.name,
+      model: isRug ? null : definition.model,
+      kind: isRug ? 'rug' : 'model',
+      x,
+      z: zPosition,
+      rotation: rotation ?? 0,
+      width: width ?? definition.width,
+      depth: depth ?? definition.depth,
+      height: height ?? definition.height,
+      material: material ?? definition.material,
+      locked: false,
+      dimensionsLocked: false,
+      visible: true,
+      ...(estimate ? { estimated: estimate } : {}),
+    }
+    const dimensions = `${object.width.toFixed(2)} W × ${object.depth.toFixed(2)} D × ${object.height.toFixed(2)} H m`
+    const estimateNote = object.estimated ? ` Estimate: ${object.estimated}.` : ''
+    return pending(project, { summary: `Propose adding ${object.name} at X ${x.toFixed(2)} m, Z ${zPosition.toFixed(2)} m, rotation ${object.rotation.toFixed(1)}°. Size: ${dimensions}. Material: ${object.material}.${estimateNote}`, objectAddition: object })
   })
   return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] }
 })

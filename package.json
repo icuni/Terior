@@ -12,6 +12,7 @@
     "start:electron": "electron .",
     "build:web": "tsc --noEmit && vite build",
     "build": "npm run build:web",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
     "package:win": "npm run build:web && electron-builder --win nsis",
     "package:dir": "npm run build:web && electron-builder --dir",
     "mcp": "node mcp-server/server.mjs",
